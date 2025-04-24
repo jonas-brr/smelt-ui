@@ -1,12 +1,28 @@
+
+interface ProductDetail {
+  name: string;
+  id: number;
+  architecture: string;
+  cpe: string;
+  friendly_name: string;
+  short_name: string;
+  version: string;
+  friendly_version: string;  // this would be best as a title
+  kind: string;
+  status: string;  // support status (general support / ltss)
+  predecessors: number[];
+  successors: number[];
+};
+
 export type Product = {
   name: string;
   id: number;
-  friendly_name: string;
+  friendly_name: string;  // this would be best as a title
   version: string;
   cpe: string;
   end_of_life: string | null;
   repos: string[];
-  details: any[];
+  details: ProductDetail[];  // SCC Products
   increments: number[];
 };
 
@@ -45,7 +61,51 @@ export const products = [
       "Example:Products:Product-Server:1.0:x86_64",
       "Example:Updates:Product-Server:1.0:x86_64",
     ],
-    details: [],
+    details: [
+      {
+        name: "example-product-server",
+        id: 1001,
+        architecture: "x86_64",
+        cpe: "cpe:/o:example:product-server:1.0",
+        friendly_name: "Example Product Server x86_64",
+        short_name: "product-server",
+        version: "1.0",
+        friendly_version: "1.0",
+        kind: "base",
+        status: "General Support",
+        predecessors: [],
+        successors: [1002],
+      },
+      {
+        name: "example-product-server-devel",
+        id: 1004,
+        architecture: "aarch64",
+        cpe: "cpe:/o:example:product-server:1.0",
+        friendly_name: "Example Product Server Devel aarch64",
+        short_name: "product-server-devel",
+        version: "1.0",
+        friendly_version: "1.0",
+        kind: "base",
+        status: "General Support",
+        predecessors: [],
+        successors: [],
+      },
+      {
+        name: "example-product-server-debug",
+        id: 1005,
+        architecture: "ppc64le",
+        cpe: "cpe:/o:example:product-server:1.0 ppc64le",
+        friendly_name: "Example Product Server Debug",
+        short_name: "product-server-debug",
+        version: "1.0",
+        friendly_version: "1.0",
+        kind: "base",
+        status: "General Support",
+        predecessors: [],
+        successors: [],
+      },
+
+    ],
     increments: [1001, 1002],
   },
   {
