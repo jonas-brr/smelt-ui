@@ -5,6 +5,8 @@ import vue from '@vitejs/plugin-vue'
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 import UnoCSS from 'unocss/vite'
 
+const backendPort = process.env.VITE_BACKEND_PORT || '8000'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   base: process.env.VUE_BASE_PATH || '/',
@@ -22,7 +24,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:8000',
+        target: `http://127.0.0.1:${backendPort}`,
         changeOrigin: true
       }
     }
